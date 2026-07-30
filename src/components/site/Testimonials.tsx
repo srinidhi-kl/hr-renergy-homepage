@@ -1,52 +1,97 @@
+import { useEffect, useState } from "react";
 import { Star, Quote } from "lucide-react";
+import { Reveal, useInView } from "./motion";
+import { cn } from "@/lib/utils";
 
 const testimonials = [
   {
-    quote:
-      "Our 8 kW rooftop system was installed in three days and the bill dropped from ₹6,800 to ₹700 in the first month. The team explained every component clearly.",
     name: "Ramesh Iyer",
-    meta: "Homeowner, JP Nagar",
+    role: "Homeowner, Jayanagar",
+    quote:
+      "Our 5 kW rooftop system was up in four days and the bill dropped from ₹6,800 to under ₹700 a month. The team handled every DISCOM formality.",
   },
   {
+    name: "Priya Nair",
+    role: "Facility Head, Tech Park",
     quote:
-      "We evaluated four vendors. HR Renergy gave the most honest yield estimate and their after-sales service has been genuinely responsive.",
-    name: "Anita Deshpande",
-    meta: "Secretary, Lakeview Residency",
+      "HR Renergy retrofitted heat pumps across two towers with zero downtime for residents. Their monitoring reports are genuinely useful.",
   },
   {
+    name: "Anand Kulkarni",
+    role: "Managing Director, Precision Auto",
     quote:
-      "The servo stabilizer and battery backup they installed have kept our CNC machines running through every voltage dip this year.",
-    name: "Vikram Shetty",
-    meta: "Director, Balaji Industries",
+      "180 kWp on our factory roof, commissioned on schedule. Payback is tracking a full quarter ahead of the projection they gave us.",
   },
 ];
 
 export function Testimonials() {
-  return (
-    <section className="section-pad bg-surface">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Testimonials</p>
-          <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">What our customers say</h2>
-        </div>
+  const [active, setActive] = useState(0);
+  const [ref, inView] = useInView<HTMLDivElement>(0.3);
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {testimonials.map((t) => (
-            <figure key={t.name} className="card-soft card-hover flex h-full flex-col p-6">
-              <Quote className="size-8 text-brand-soft" />
-              <div className="mt-4 flex gap-0.5 text-accent">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-current" />
+  useEffect(() => {
+    const t = setInterval(() => setActive((a) => (a + 1) % testimonials.length), 6000);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <section className="section-pad relative overflow-hidden bg-surface">
+      <span className="blob animate-float-slow right-[-4rem] bottom-0 size-80 bg-primary/10" />
+      <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
+        <Reveal>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+            Customer stories
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-extrabold sm:text-5xl">
+            Trusted by 9,500+ households.
+          </h2>
+        </Reveal>
+
+        <div ref={ref} className="relative mt-14 min-h-[290px] sm:min-h-[250px]">
+          {testimonials.map((t, i) => (
+            <figure
+              key={t.name}
+              className={cn(
+                "absolute inset-0 flex flex-col items-center transition-all duration-700 ease-out",
+                i === active
+                  ? "translate-y-0 opacity-100"
+                  : "pointer-events-none translate-y-5 opacity-0",
+              )}
+            >
+              <Quote className="size-9 text-accent" />
+              <div className="mt-5 flex gap-1">
+                {[0, 1, 2, 3, 4].map((s) => (
+                  <Star
+                    key={s}
+                    className={cn(
+                      "size-5 fill-accent text-accent transition-all duration-500",
+                      inView && i === active ? "scale-100 opacity-100" : "scale-50 opacity-0",
+                    )}
+                    style={{ transitionDelay: `${s * 130}ms` }}
+                  />
                 ))}
               </div>
-              <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+              <blockquote className="mt-6 font-display text-lg font-medium leading-relaxed sm:text-2xl">
                 “{t.quote}”
               </blockquote>
-              <figcaption className="mt-6 border-t border-border pt-4">
-                <p className="font-semibold">{t.name}</p>
-                <p className="text-sm text-muted-foreground">{t.meta}</p>
+              <figcaption className="mt-6 text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">{t.name}</span> · {t.role}
               </figcaption>
             </figure>
+          ))}
+        </div>
+
+        <div className="mt-6 flex justify-center gap-2">
+          {testimonials.map((t, i) => (
+            <button
+              key={t.name}
+              type="button"
+              aria-label={`Show testimonial ${i + 1}`}
+              onClick={() => setActive(i)}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-500",
+                i === active ? "w-8 bg-primary" : "w-3 bg-border",
+              )}
+            />
           ))}
         </div>
       </div>
