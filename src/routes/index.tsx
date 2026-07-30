@@ -1,24 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { TopBar } from "@/components/site/TopBar";
+import { Header } from "@/components/site/Header";
+import { Hero } from "@/components/site/Hero";
+import { Stats } from "@/components/site/Stats";
+import { Solutions } from "@/components/site/Solutions";
+import { WhyUs } from "@/components/site/WhyUs";
+import { Process } from "@/components/site/Process";
+import { Projects } from "@/components/site/Projects";
+import { Testimonials } from "@/components/site/Testimonials";
+import { CtaBanner } from "@/components/site/CtaBanner";
+import { Contact } from "@/components/site/Contact";
+import { Footer } from "@/components/site/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "HR Renergy | Solar & Home Utility Solutions in India" },
+      {
+        name: "description",
+        content:
+          "HR Renergy installs solar power plants, solar water heaters, heat pumps, batteries, water softeners and servo stabilizers for homes and industry across India.",
+      },
+      { property: "og:title", content: "HR Renergy | Solar & Home Utility Solutions in India" },
+      {
+        property: "og:description",
+        content:
+          "Cut your electricity bills with expertly engineered solar, water heating and home utility systems. Free site assessment.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <TopBar />
+      <Header />
+      <main>
+        <Hero />
+        <Stats />
+        <Solutions />
+        <WhyUs />
+        <Process />
+        <Projects />
+        <Testimonials />
+        <CtaBanner />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
