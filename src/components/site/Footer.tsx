@@ -1,88 +1,102 @@
-import { Sun, Facebook, Instagram, Linkedin, Youtube, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Sun, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { company, navLinks, products } from "./data";
+import { Reveal } from "./motion";
 
-const socials = [Facebook, Instagram, Linkedin, Youtube];
+const socials = [
+  { icon: Facebook, label: "Facebook" },
+  { icon: Instagram, label: "Instagram" },
+  { icon: Linkedin, label: "LinkedIn" },
+  { icon: Youtube, label: "YouTube" },
+];
 
 export function Footer() {
   return (
-    <footer className="bg-brand-dark text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="grid size-9 place-items-center rounded-xl bg-primary-foreground/15">
-              <Sun className="size-5" />
-            </span>
-            <span className="font-display text-xl font-extrabold">HR Renergy</span>
-          </div>
-          <p className="mt-4 text-sm text-primary-foreground/75">
-            Renewable energy and home-utility solutions for homes, societies and industry across India.
-          </p>
-          <div className="mt-5 flex gap-2">
-            {socials.map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="Social profile"
-                className="rounded-full bg-primary-foreground/10 p-2 transition hover:bg-primary-foreground/20"
-              >
-                <Icon className="size-4" />
-              </a>
-            ))}
-          </div>
-        </div>
+    <footer className="relative overflow-hidden bg-ink pt-16 text-ink-foreground">
+      <span className="blob animate-float-slow left-1/3 top-0 size-72 bg-primary/15" />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal>
+            <div className="flex items-center gap-2.5">
+              <span className="grid size-9 place-items-center rounded-full bg-primary">
+                <Sun className="size-5 text-primary-foreground" />
+              </span>
+              <span className="font-display text-lg font-extrabold">HR Renergy</span>
+            </div>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-ink-foreground/70">
+              Clean energy and home-utility systems, engineered and serviced in-house across
+              South India since 2013.
+            </p>
+            <div className="mt-6 flex gap-3">
+              {socials.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href="#"
+                    aria-label={s.label}
+                    className="grid size-10 place-items-center rounded-full border border-ink-foreground/15 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:text-accent"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                );
+              })}
+            </div>
+          </Reveal>
 
-        <div>
-          <h3 className="font-display text-base font-bold">Quick Links</h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-primary-foreground/75">
-            {navLinks.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="transition hover:text-primary-foreground">
-                  {l.label}
+          <Reveal delay={100}>
+            <h3 className="font-display text-sm font-bold uppercase tracking-widest text-accent">
+              Quick links
+            </h3>
+            <ul className="mt-5 space-y-3 text-sm text-ink-foreground/70">
+              {navLinks.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href} className="transition-colors hover:text-accent">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={180}>
+            <h3 className="font-display text-sm font-bold uppercase tracking-widest text-accent">
+              Products
+            </h3>
+            <ul className="mt-5 space-y-3 text-sm text-ink-foreground/70">
+              {products.map((p) => (
+                <li key={p.id}>
+                  <a href="#solutions" className="transition-colors hover:text-accent">
+                    {p.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={260}>
+            <h3 className="font-display text-sm font-bold uppercase tracking-widest text-accent">
+              Contact
+            </h3>
+            <ul className="mt-5 space-y-3 text-sm text-ink-foreground/70">
+              <li>{company.address}</li>
+              <li>
+                <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="hover:text-accent">
+                  {company.phone}
                 </a>
               </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="font-display text-base font-bold">Our Products</h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-primary-foreground/75">
-            {products.map((p) => (
-              <li key={p.id}>
-                <a href={`#${p.id}`} className="transition hover:text-primary-foreground">
-                  {p.name}
+              <li>
+                <a href={`mailto:${company.email}`} className="hover:text-accent">
+                  {company.email}
                 </a>
               </li>
-            ))}
-          </ul>
+              <li>{company.hours}</li>
+            </ul>
+          </Reveal>
         </div>
 
-        <div>
-          <h3 className="font-display text-base font-bold">Get in Touch</h3>
-          <ul className="mt-4 space-y-3 text-sm text-primary-foreground/75">
-            <li className="flex gap-3">
-              <MapPin className="mt-0.5 size-4 shrink-0" />
-              {company.address}
-            </li>
-            <li className="flex gap-3">
-              <Phone className="mt-0.5 size-4 shrink-0" />
-              {company.phone}
-            </li>
-            <li className="flex gap-3">
-              <Mail className="mt-0.5 size-4 shrink-0" />
-              {company.email}
-            </li>
-            <li className="flex gap-3">
-              <Clock className="mt-0.5 size-4 shrink-0" />
-              {company.hours}
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-primary-foreground/15">
-        <div className="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-primary-foreground/70">
-          © {new Date().getFullYear()} HR Renergy. All rights reserved.
+        <div className="flex flex-col gap-3 border-t border-ink-foreground/10 py-7 text-xs text-ink-foreground/55 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} HR Renergy. All rights reserved.</p>
+          <p>Privacy Policy · Terms of Service</p>
         </div>
       </div>
     </footer>

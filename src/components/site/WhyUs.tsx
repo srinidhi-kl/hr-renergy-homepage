@@ -1,45 +1,98 @@
-import { ShieldCheck, BadgeCheck, Headset, Leaf } from "lucide-react";
+import { ShieldCheck, Wrench, LineChart, BadgeIndianRupee, type LucideIcon } from "lucide-react";
+import { Reveal, useScrollProgress, useInView } from "./motion";
+import { cn } from "@/lib/utils";
 
-const values = [
+type Value = { icon: LucideIcon; title: string; body: string };
+
+const values: Value[] = [
   {
     icon: ShieldCheck,
-    title: "Quality Components",
-    text: "Only tier-1 panels, inverters and BOS from brands with proven field performance and real warranties.",
+    title: "Tier-1 components only",
+    body: "Panels, inverters and pumps from certified manufacturers, backed by full warranty support.",
   },
   {
-    icon: BadgeCheck,
-    title: "Certified Experts",
-    text: "MNRE-aligned engineering, licensed electricians and documented installation standards on every site.",
+    icon: Wrench,
+    title: "In-house installation crews",
+    body: "No subcontracting. The team that designs your system is the team that installs it.",
   },
   {
-    icon: Headset,
-    title: "After-Sales Support",
-    text: "Annual maintenance contracts, performance monitoring and a support team that answers the phone.",
+    icon: LineChart,
+    title: "Performance monitoring",
+    body: "Live generation dashboards and proactive alerts, so under-performance never goes unnoticed.",
   },
   {
-    icon: Leaf,
-    title: "Sustainability First",
-    text: "Every system we commission is sized to maximise clean generation and reduce lifetime carbon.",
+    icon: BadgeIndianRupee,
+    title: "Subsidy & finance help",
+    body: "We handle net-metering paperwork, DISCOM approvals and subsidy claims end to end.",
   },
 ];
 
-export function WhyUs() {
+function ValueRow({ value, index }: { value: Value; index: number }) {
+  const [ref, inView] = useInView<HTMLDivElement>(0.4);
+  const Icon = value.icon;
   return (
-    <section id="why-us" className="section-pad">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Why HR Renergy</p>
-          <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Built on engineering, not sales pitches</h2>
-        </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map((v) => (
-            <div key={v.title} className="rounded-3xl border border-border bg-card p-6 transition hover:border-accent">
-              <span className="grid size-12 place-items-center rounded-2xl bg-accent/15 text-accent-foreground">
-                <v.icon className="size-6" />
-              </span>
-              <h3 className="mt-5 text-lg font-bold">{v.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.text}</p>
-            </div>
+    <div
+      ref={ref}
+      className={cn(
+        "relative flex gap-5 pb-12 transition-all duration-700 ease-out",
+        inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
+      )}
+      style={{ transitionDelay: `${index * 80}ms` }}
+    >
+      <span
+        className={cn(
+          "z-10 grid size-14 shrink-0 place-items-center rounded-2xl border transition-all duration-700",
+          inView
+            ? "scale-100 border-primary bg-primary text-primary-foreground"
+            : "scale-75 border-border bg-card text-muted-foreground",
+        )}
+      >
+        <Icon className="size-6" />
+      </span>
+      <div className="pt-1">
+        <h3 className="font-display text-lg font-bold sm:text-xl">{value.title}</h3>
+        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {value.body}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export function WhyUs() {
+  const [ref, progress] = useScrollProgress<HTMLDivElement>();
+
+  return (
+    <section id="why-us" className="section-pad relative overflow-hidden bg-surface">
+      <span className="blob animate-float right-[-4rem] top-1/3 size-80 bg-primary/10" />
+      <div className="relative mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
+        <Reveal className="lg:sticky lg:top-32 lg:h-fit">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+            Why HR Renergy
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight sm:text-5xl">
+            Engineering first.
+            <br />
+            Sales second.
+          </h2>
+          <p className="mt-6 max-w-md text-muted-foreground">
+            Every proposal starts with a shadow analysis, a load study and an honest payback
+            number. If solar isn't the right answer for your site, we'll tell you.
+          </p>
+          <a href="#contact" className="btn-base btn-primary mt-8">
+            Talk to an engineer
+          </a>
+        </Reveal>
+
+        <div ref={ref} className="relative pl-1">
+          {/* Animated connector line */}
+          <span className="absolute left-7 top-4 h-[calc(100%-5rem)] w-px bg-border" />
+          <span
+            className="absolute left-7 top-4 w-px origin-top bg-accent transition-[height] duration-200 ease-out"
+            style={{ height: `calc((100% - 5rem) * ${progress})` }}
+          />
+          {values.map((v, i) => (
+            <ValueRow key={v.title} value={v} index={i} />
           ))}
         </div>
       </div>
