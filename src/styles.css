@@ -368,7 +368,24 @@
   transition: transform 0.25s ease, box-shadow 0.3s ease, background-color 0.25s ease;
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 0 6px oklch(0.77 0.155 72 / 0.18), 0 14px 34px -12px oklch(0.77 0.155 72 / 0.6);
+    box-shadow: 0 0 0 6px oklch(0.575 0.147 251 / 0.16), 0 14px 34px -12px oklch(0.575 0.147 251 / 0.5);
+  }
+}
+
+@utility btn-sun {
+  background-image: var(--gradient-sun);
+  color: var(--accent-foreground);
+  box-shadow: var(--shadow-soft);
+  &:hover {
+    filter: brightness(1.04) saturate(1.05);
+  }
+}
+
+@utility btn-leaf {
+  background-color: var(--leaf);
+  color: oklch(0.99 0.002 250);
+  &:hover {
+    background-color: var(--leaf-dark);
   }
 }
 
@@ -386,12 +403,13 @@
 }
 
 :root {
-  --ink: oklch(0.19 0.018 160);
-  --ink-soft: oklch(0.25 0.02 160);
-  --ink-foreground: oklch(0.97 0.008 95);
+  --ink: oklch(0.24 0.014 258);
+  --ink-soft: oklch(0.3 0.014 258);
+  --ink-foreground: oklch(0.98 0.003 250);
 }
 @theme inline {
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-foreground: var(--ink-foreground);
 }
+
