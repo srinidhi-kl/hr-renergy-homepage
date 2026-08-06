@@ -88,7 +88,7 @@ export function WhyUs() {
           {/* Animated connector line */}
           <span className="absolute left-7 top-4 h-[calc(100%-5rem)] w-px bg-border" />
           <span
-            className="absolute left-7 top-4 w-px origin-top bg-accent transition-[height] duration-200 ease-out"
+            className="absolute left-7 top-4 w-px origin-top bg-primary transition-[height] duration-200 ease-out"
             style={{ height: `calc((100% - 5rem) * ${progress})` }}
           />
           {values.map((v, i) => (

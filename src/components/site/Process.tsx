@@ -38,7 +38,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
     >
       <span
         className={cn(
-          "grid size-16 place-items-center rounded-2xl border border-ink-foreground/15 bg-ink-soft text-accent transition-all duration-700 ease-out",
+          "grid size-16 place-items-center rounded-2xl border border-border bg-card text-primary shadow-soft transition-all duration-700 ease-out",
           inView ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-75 opacity-0",
         )}
         style={{ transitionDelay: `${index * 140}ms`, transitionTimingFunction: "cubic-bezier(0.34,1.56,0.64,1)" }}
@@ -52,11 +52,11 @@ function StepCard({ step, index }: { step: Step; index: number }) {
         )}
         style={{ transitionDelay: `${index * 140 + 120}ms` }}
       >
-        <span className="font-display text-sm font-bold text-accent">
+        <span className="font-display text-sm font-bold text-leaf-dark">
           Step {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="mt-2 font-display text-xl font-bold text-ink-foreground">{step.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink-foreground/70">{step.body}</p>
+        <h3 className="mt-2 font-display text-xl font-bold text-foreground">{step.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
       </div>
     </div>
   );
@@ -66,23 +66,23 @@ export function Process() {
   const [ref, progress] = useScrollProgress<HTMLDivElement>();
 
   return (
-    <section id="process" className="section-pad relative overflow-hidden bg-ink">
-      <span className="blob animate-float-slow left-1/4 top-0 size-80 bg-primary/20" />
+    <section id="process" className="section-pad relative overflow-hidden bg-background">
+      <span className="blob animate-float-slow left-1/4 top-0 size-80 bg-primary/10" />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-accent">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
             How it works
           </p>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl font-extrabold leading-tight text-ink-foreground sm:text-5xl">
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-extrabold leading-tight text-foreground sm:text-5xl">
             From first call to first unit generated.
           </h2>
         </Reveal>
 
         <div ref={ref} className="relative mt-16">
           {/* Self-drawing connector */}
-          <div className="absolute left-0 right-0 top-8 hidden h-px bg-ink-foreground/15 sm:block">
+          <div className="absolute left-0 right-0 top-8 hidden h-px bg-border sm:block">
             <span
-              className="block h-px bg-accent transition-[width] duration-200 ease-out"
+              className="block h-px bg-primary transition-[width] duration-200 ease-out"
               style={{ width: `${progress * 100}%` }}
             />
           </div>

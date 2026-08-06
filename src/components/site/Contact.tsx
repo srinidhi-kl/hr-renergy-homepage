@@ -25,7 +25,7 @@ function Field({
   textarea?: boolean;
 }) {
   const shared =
-    "peer w-full rounded-2xl border border-border bg-card px-4 pb-2.5 pt-6 text-sm outline-none transition-all duration-300 placeholder-transparent focus:border-primary focus:shadow-[0_0_0_4px_oklch(0.5_0.13_155/0.12)]";
+    "peer w-full rounded-2xl border border-border bg-card px-4 pb-2.5 pt-6 text-sm outline-none transition-all duration-300 placeholder-transparent focus:border-primary focus:shadow-[0_0_0_4px_oklch(0.575_0.147_251/0.14)]";
   return (
     <div className="relative">
       {textarea ? (
@@ -59,7 +59,7 @@ export function Contact() {
   return (
     <section id="contact" className="section-pad relative overflow-hidden bg-background">
       <span className="blob animate-float-slow left-[-6rem] top-24 size-80 bg-primary/10" />
-      <span className="blob animate-float right-[-4rem] bottom-10 size-72 bg-accent/10" />
+      <span className="blob animate-float right-[-4rem] bottom-10 size-72 bg-sun/20" />
 
       <div className="relative mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
         <div>
@@ -109,7 +109,7 @@ export function Contact() {
                 name="product"
                 defaultValue=""
                 required
-                className="w-full appearance-none rounded-2xl border border-border bg-card px-4 pb-2.5 pt-6 text-sm outline-none transition-all duration-300 focus:border-primary focus:shadow-[0_0_0_4px_oklch(0.5_0.13_155/0.12)]"
+                className="w-full appearance-none rounded-2xl border border-border bg-card px-4 pb-2.5 pt-6 text-sm outline-none transition-all duration-300 focus:border-primary focus:shadow-[0_0_0_4px_oklch(0.575_0.147_251/0.14)]"
               >
                 <option value="" disabled>
                   Select a product

@@ -14,7 +14,7 @@ export function Projects() {
 
   return (
     <section id="projects" className="section-pad relative overflow-hidden bg-background">
-      <span className="blob animate-float left-[-5rem] top-16 size-72 bg-accent/10" />
+      <span className="blob animate-float left-[-5rem] top-16 size-72 bg-sun/20" />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Reveal>

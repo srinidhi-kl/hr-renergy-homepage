@@ -6,7 +6,10 @@ export function Hero() {
   const scrollY = useScrollY();
 
   return (
-    <section id="home" className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-ink">
+    <section
+      id="home"
+      className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-background"
+    >
       {/* Parallax background */}
       <div
         className="absolute inset-0 z-0 will-change-transform"
@@ -14,21 +17,22 @@ export function Hero() {
       >
         <img
           src={heroImage}
-          alt="Aerial view of a large rooftop solar installation at golden hour"
+          alt="Rooftop solar panel array under a bright blue sky with white clouds"
           width={1920}
           height={1280}
           className="size-full object-cover"
         />
       </div>
 
-      {/* Bottom-heavy gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_bottom,rgba(10,18,15,0.72)_0%,rgba(10,18,15,0.28)_35%,rgba(10,18,15,0.82)_78%,rgba(10,18,15,0.96)_100%)]" />
+      {/* Very light gradient for text legibility */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,oklch(1_0_0/0.86)_0%,oklch(1_0_0/0.6)_45%,oklch(1_0_0/0.15)_75%,oklch(1_0_0/0.05)_100%)]" />
+      <div className="absolute inset-x-0 bottom-0 z-0 h-40 bg-[linear-gradient(to_bottom,oklch(1_0_0/0),oklch(0.985_0.004_250/0.95))]" />
 
       {/* Floating accent elements */}
       <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
-        <span className="blob animate-float right-[8%] top-[18%] size-64 bg-accent/25" />
-        <span className="blob animate-float-slow left-[6%] top-[45%] size-72 bg-primary/25" />
-        <span className="absolute right-[14%] top-[22%] hidden animate-pulse-glow text-accent/70 md:block">
+        <span className="blob animate-float right-[8%] top-[16%] size-64 bg-sun/30" />
+        <span className="blob animate-float-slow left-[4%] top-[52%] size-72 bg-primary/15" />
+        <span className="absolute right-[12%] top-[18%] hidden animate-pulse-glow text-accent/70 md:block">
           <Sun className="size-24 animate-spin-slow" strokeWidth={0.8} />
         </span>
         {[
@@ -40,7 +44,7 @@ export function Hero() {
         ].map((p) => (
           <span
             key={p.l + p.t}
-            className={`absolute ${p.s} animate-float rounded-full bg-accent/70 blur-[1px]`}
+            className={`absolute ${p.s} animate-float rounded-full bg-accent/80 blur-[1px]`}
             style={{ left: p.l, top: p.t, animationDelay: p.d }}
           />
         ))}
@@ -50,21 +54,21 @@ export function Hero() {
       <div className="relative z-20 mx-auto flex h-full max-w-7xl flex-col justify-end px-5 pb-28 sm:px-8 lg:pb-32">
         <div className="max-w-3xl">
           <p
-            className="animate-[hr-fade-up_0.8s_cubic-bezier(0.22,1,0.36,1)_both] text-xs font-semibold uppercase tracking-[0.28em] text-accent"
+            className="inline-flex animate-[hr-fade-up_0.8s_cubic-bezier(0.22,1,0.36,1)_both] items-center gap-2 rounded-full bg-leaf-soft px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-leaf-dark"
             style={{ animationDelay: "0.1s" }}
           >
             Renewable energy · India
           </p>
           <h1
-            className="mt-5 animate-[hr-fade-up_0.9s_cubic-bezier(0.22,1,0.36,1)_both] font-display text-4xl font-extrabold leading-[1.05] text-ink-foreground sm:text-6xl lg:text-7xl"
+            className="mt-6 animate-[hr-fade-up_0.9s_cubic-bezier(0.22,1,0.36,1)_both] font-display text-4xl font-extrabold leading-[1.05] text-foreground sm:text-6xl lg:text-7xl"
             style={{ animationDelay: "0.22s" }}
           >
             Power your home
             <br />
-            with the sun.
+            with the <span className="text-primary">sun.</span>
           </h1>
           <p
-            className="mt-6 max-w-xl animate-[hr-fade-up_0.9s_cubic-bezier(0.22,1,0.36,1)_both] text-base leading-relaxed text-ink-foreground/80 sm:text-lg"
+            className="mt-6 max-w-xl animate-[hr-fade-up_0.9s_cubic-bezier(0.22,1,0.36,1)_both] text-base leading-relaxed text-muted-foreground sm:text-lg"
             style={{ animationDelay: "0.36s" }}
           >
             Solar plants, water heating, heat pumps, storage and clean-water systems —
@@ -74,13 +78,13 @@ export function Hero() {
             className="mt-9 flex animate-[hr-fade-up_0.9s_cubic-bezier(0.22,1,0.36,1)_both] flex-wrap gap-3"
             style={{ animationDelay: "0.5s" }}
           >
-            <a href="#contact" className="btn-base btn-accent glow-hover">
+            <a href="#contact" className="btn-base btn-primary glow-hover">
               Get a free site survey
               <ArrowRight className="size-4" />
             </a>
             <a
               href="#solutions"
-              className="btn-base border border-ink-foreground/35 text-ink-foreground backdrop-blur-sm transition-colors hover:bg-ink-foreground/10"
+              className="btn-base btn-outline bg-card/80 backdrop-blur-sm hover:border-leaf hover:text-leaf-dark"
             >
               Explore solutions
             </a>
@@ -91,7 +95,7 @@ export function Hero() {
       <a
         href="#stats"
         aria-label="Scroll down"
-        className="absolute bottom-7 left-1/2 z-20 -translate-x-1/2 text-ink-foreground/70 transition-colors hover:text-accent"
+        className="absolute bottom-7 left-1/2 z-20 -translate-x-1/2 text-muted-foreground transition-colors hover:text-primary"
       >
         <span className="flex h-11 w-7 items-start justify-center rounded-full border border-current p-1.5">
           <span className="size-1.5 animate-bounce-y rounded-full bg-current" />
