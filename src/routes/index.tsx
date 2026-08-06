@@ -41,6 +41,8 @@ function Index() {
         <Hero />
         <Stats />
         <Solutions />
+        <BatterySupply />
+
         <WhyUs />
         <Process />
         <Projects />
