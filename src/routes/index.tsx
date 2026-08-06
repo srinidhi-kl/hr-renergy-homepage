@@ -3,6 +3,8 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { Stats } from "@/components/site/Stats";
 import { Solutions } from "@/components/site/Solutions";
+import { BatterySupply } from "@/components/site/BatterySupply";
+
 import { WhyUs } from "@/components/site/WhyUs";
 import { Process } from "@/components/site/Process";
 import { Projects } from "@/components/site/Projects";
